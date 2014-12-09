@@ -33,7 +33,7 @@ A: It's under the Settings -> Discussion menu
 
 == Screenshots ==
 
-1. /assets/screenshot1.png
+1. /assets/screenshot - 1.png
 
 == Changelog ==
 
