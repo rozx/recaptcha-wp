@@ -1,5 +1,5 @@
 === Recaptcha - wp ===
-Contributors: rozx,pinoceniccola
+Contributors: rozx
 Donate link: http://www.heavyskymobile.com/
 Tags: comments, spam, recaptcha
 Requires at least: 3.0.1
