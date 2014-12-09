@@ -37,7 +37,7 @@ A: It's under the Settings -> Discussion menu
 
 == Changelog ==
 
-= 0.23 =
+= 0.2.3 =
 
 +Added non-member only recaptcha.
 

@@ -3,7 +3,7 @@
 Plugin Name: reCAPTCHA
 Description: A wordpress Plugin enable google reCAPTCHA in your wordpress Site.
 Plugin URI: http://www.heavyskymobile.com
-Version: 0.23
+Version: 0.2.3
 Author: rozx
 Author URI: http://www.heavyskymobile.com
 License: GPLv2 
