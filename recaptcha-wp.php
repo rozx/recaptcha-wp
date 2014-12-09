@@ -3,7 +3,7 @@
 Plugin Name: reCAPTCHA
 Description: A wordpress Plugin enable google reCAPTCHA in your wordpress Site.
 Plugin URI: http://www.heavyskymobile.com
-Version: 0.2
+Version: 0.23
 Author: rozx
 Author URI: http://www.heavyskymobile.com
 License: GPLv2 
@@ -26,7 +26,7 @@ function wp_recaptcha_callback() {
 
 function wp_recaptcha_input() {
  	//echo '<input name="wp_recaptcha_register" type="checkbox" value="1" ' . checked( 1, get_option( 'wp_recaptcha_register' ), false ) . ' /> Use reCAPTCHA when new user registering. </em><br><br>';
- 	echo '<input name="wp_recaptcha_comment" type="checkbox" value="1" ' . checked( 1, get_option( 'wp_recaptcha_comment' ), false ) . ' /> Use reCAPTCHA when posting comments. </em><br><br>';
+ 	echo '<input name="wp_recaptcha_comment" type="checkbox" value="1" ' . checked( 1, get_option( 'wp_recaptcha_comment' ), false ) . ' /> Use reCAPTCHA only for guest. </em><br><br>';
  	echo '<em>Site key:  </em><input name="p_site_key" type="text" value=" '. get_option( 'p_site_key' ) . '" size = "50" /> <br><br>';
  	echo '<em>Secret key:  </em><input name="p_secret_key" type="text" value=" ' .get_option( 'p_secret_key' ) .'" size = "50"/><br><br>';
  	
@@ -45,7 +45,7 @@ function wp_recaptcha_init(){
     if(get_option( 'wp_recaptcha_comment' )){
 	
     	if (!is_user_logged_in()) {
-        	// config the comment form
+	// config the comment form
         	
              add_filter('comment_form_field_comment','wp_recaptcha_config');
              
@@ -54,7 +54,13 @@ function wp_recaptcha_init(){
     	    add_filter('preprocess_comment','wp_recaptcha_process');
     	}
         
-    }
+    } else {
+	      add_filter('comment_form_field_comment','wp_recaptcha_config');
+             
+    	    // process the comment
+    	    
+    	    add_filter('preprocess_comment','wp_recaptcha_process');
+}
     
     /*
     

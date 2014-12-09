@@ -27,15 +27,19 @@ Free and fast.
 
 == Frequently Asked Questions ==
 
-Q: Where can you find settings of thie plugin?
+Q: Where can I find the settings of thie plugin?
 
 A: It's under the Settings -> Discussion menu
 
 == Screenshots ==
 
-1. '/assets/screenshot1.png'
+1. /assets/screenshot1.png
 
 == Changelog ==
+
+= 0.23=
++Added non-member only recaptcha.
+
 
 = 0.2 =
 
