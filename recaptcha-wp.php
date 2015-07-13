@@ -2,8 +2,8 @@
 /*
 Plugin Name: reCAPTCHA
 Description: A wordpress Plugin enable google reCAPTCHA in your wordpress Site.
-Plugin URI: https://wordpress.org/plugins/recaptcha-wp/
-Version: 0.2.3
+Plugin URI: http://www.heavyskymobile.com
+Version: 0.2.4
 Author: rozx
 Author URI: http://www.heavyskymobile.com
 License: GPLv2 
@@ -18,6 +18,7 @@ function wp_recaptcha_admin_init(){
 	register_setting( 'discussion', 'wp_recaptcha_register' );
 	register_setting( 'discussion', 'p_site_key' );
 	register_setting( 'discussion', 'p_secret_key' );
+	register_setting( 'discussion', 'p_addtional_scripts' );
 }
 
 function wp_recaptcha_callback() {
@@ -29,8 +30,10 @@ function wp_recaptcha_input() {
  	echo '<input name="wp_recaptcha_comment" type="checkbox" value="1" ' . checked( 1, get_option( 'wp_recaptcha_comment' ), false ) . ' /> Use reCAPTCHA only for guest. </em><br><br>';
  	echo '<em>Site key:  </em><input name="p_site_key" type="text" value=" '. get_option( 'p_site_key' ) . '" size = "50" /> <br><br>';
  	echo '<em>Secret key:  </em><input name="p_secret_key" type="text" value=" ' .get_option( 'p_secret_key' ) .'" size = "50"/><br><br>';
+ 	echo '<em>Configurations  (g-recaptcha tag attributes and grecaptcha.render parameters)  :  </em> <br><textarea name="p_addtional_scripts" value=" ' .get_option( 'p_addtional_scripts' ) .'" cols = "50" rows = "10">' .get_option( 'p_addtional_scripts' ) .'</textarea><br><br>';
  	
- 	echo '<em>get your reCAPTCHA keys here:  <a href="https://www.google.com/recaptcha/intro/index.html">reCAPTCHA</a></em>';
+ 	echo '<em>Get your reCAPTCHA keys here:  <a href="https://www.google.com/recaptcha/intro/index.html">reCAPTCHA</a></em><br><br>';
+ 	echo '<em>Check out <a href="https://developers.google.com/recaptcha/docs/">Google documents</a></em><br><br>';
  	
 }
 
@@ -77,7 +80,28 @@ function wp_recaptcha_register_form(){
 }
 
 function wp_recaptcha_head(){
-    echo '<script src="https://www.google.com/recaptcha/api.js"></script>';
+    //echo '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>"></script>';
+    
+    
+    $conf = get_option( 'p_addtional_scripts' );
+    
+    if(substr($conf,0,1) != ","){
+        
+        $conf = "," . $conf;
+        
+    }
+    
+    
+    echo '<script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render("g-recaptcha", {
+          \'sitekey\' : \''.get_option( 'p_site_key' ).'\'
+          '. $conf  .'
+        });
+      };
+      </script>
+      ';
+    
 }
 
 
@@ -108,7 +132,8 @@ function wp_recaptcha_process($commentdata) {
 
 function wp_recaptcha_config($field){
 	
-	$field = str_replace('</textarea>','</textarea><div class="g-recaptcha" data-sitekey="'. get_option( 'p_site_key' ) . '"></div>',$field);
+	//$field = str_replace('</textarea>','</textarea><div class="g-recaptcha" data-sitekey="'. get_option( 'p_site_key' ) . '"></div>',$field);
+	$field = str_replace('</textarea>','</textarea> <div id="g-recaptcha"></div><script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer> </script>',$field);
 	
 	return $field;
 }

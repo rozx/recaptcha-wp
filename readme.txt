@@ -3,7 +3,7 @@ Contributors: rozx
 Donate link: http://www.heavyskymobile.com/
 Tags: comments, spam, recaptcha
 Requires at least: 3.0.1
-Tested up to: 4.1
+Tested up to: 4.01
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,7 +33,7 @@ A: It's under the Settings -> Discussion menu
 
 == Screenshots ==
 
-1. setting screen.
+1. /assets/screenshot1.png
 
 == Changelog ==
 
